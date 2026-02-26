@@ -1,0 +1,11 @@
+/runs/
+/logs/
+/checkpoints/
+*.npz
+*.pkl
+*.txt
+**/*.pyc
+**/__pycache__/
+*.mp4
+*.pyc
+*.npy

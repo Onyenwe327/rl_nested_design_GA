@@ -1,0 +1,49 @@
+<mujoco model="single_leg_3dof_posctl">
+  <compiler angle="radian"/>
+
+  <option integrator="RK4"/>
+
+  <visual>
+    <global offwidth="1280" offheight="720"/>
+    <headlight ambient="0.4 0.4 0.4" diffuse="0.8 0.8 0.8" specular="0.2 0.2 0.2"/>
+  </visual>
+
+  <worldbody>
+    <geom name="ground" size="5 5 0.1" type="plane" friction="1 0.1 0.1" rgba="0.9 0.9 0.9 1"/>
+    <!-- <camera name="side_cam" pos="3 0 0.72" quat="-0.5 -0.5 0.5 0.5"/> -->
+    
+
+    <light name="top_light" pos="0 0 2.7" dir="0 0 -1" diffuse="0.9 0.9 0.9" specular="0.2 0.2 0.2"/>
+    <body name="root" pos="0 0 0">
+      <camera name="side_track_cam"
+        pos="0 -1.7 0.0"
+        euler="1.5708 0 0"
+        mode="track"
+        target="root"
+        />
+      <joint name="root_tx" pos="0 0 0" axis="1 0 0" type="slide"/>
+      <joint name="root_tz" pos="0 0 0" axis="0 0 1" type="slide"/>
+      <geom name="root_geom" size="0.08" rgba="0.8 0.2 0.2 1"/>
+      <body name="link_0">
+        <joint name="joint_0" pos="0 0 0" axis="0 1 0" limited="true" range="-2.0944 2.0944" armature="0.00018" damping="0.395946"/>
+        <geom name="geom_0" size="0.05 0.11" pos="0 0 -0.11" type="capsule" friction="1 0.1 0.1" mass="1.605" rgba="0.2 0.6 1 1"/>
+        <body name="link_1" pos="0 0 -0.22">
+          <joint name="joint_1" pos="0 0 0" axis="0 1 0" limited="true" range="-2.0944 2.0944" armature="0.00018" damping="0.395946"/>
+          <geom name="geom_1" size="0.05 0.11" pos="0 0 -0.11" type="capsule" friction="1 0.1 0.1" mass="1.605" rgba="0.3 0.75 1 1"/>
+          <body name="link_2" pos="0 0 -0.22">
+            <joint name="joint_2" pos="0 0 0" axis="0 1 0" limited="true" range="-2.0944 2.0944" armature="0.00018" damping="0.395946"/>
+            <geom name="geom_2" size="0.05 0.11" pos="0 0 -0.11" type="capsule" friction="1 0.1 0.1" mass="1.605" rgba="0.2 0.6 1 1"/>
+            <geom name="foot_sphere" size="0.08" pos="0 0 -0.22" friction="1 0.1 0.1" rgba="0.1 0.1 0.1 1"/>
+          </body>
+          <!-- <geom name="foot_sphere" size="0.08" pos="0 0 -0.22" friction="1 0.1 0.1" rgba="0.1 0.1 0.1 1"/> -->
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <position name="mtr_0" joint="joint_0" gear="1" kp="30.0" ctrllimited="true" ctrlrange="-2.0944 2.0944" forcelimited="true" forcerange="-17.0 17.0"/>
+    <position name="mtr_1" joint="joint_1" gear="1" kp="30.0" ctrllimited="true" ctrlrange="-2.0944 2.0944" forcelimited="true" forcerange="-17.0 17.0"/>
+    <position name="mtr_2" joint="joint_2" gear="1" kp="30.0" ctrllimited="true" ctrlrange="-2.0944 2.0944" forcelimited="true" forcerange="-17.0 17.0"/>
+  </actuator>
+
+</mujoco>
